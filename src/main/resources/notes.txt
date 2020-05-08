@@ -1,0 +1,5 @@
+mvn clean -Dtest=DPTest
+mvn clean -Dtest=DPTest#test2 test
+mvn clean -Dtest=DPTest#test2+test1 test
+mvn clean -Dtest=DPTest#test* test
+https://bugs.chromium.org/p/chromedriver/issues/detail?id=3342

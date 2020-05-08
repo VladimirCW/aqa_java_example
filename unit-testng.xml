@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="A">
+    <test name="B">
+        <!--<parameter name="login" value="Vova"/>
+        <parameter name="password" value="123"/>-->
+        <!--<parameter name="browser" value="firefox"></parameter>-->
+        <groups>
+            <run>
+                <include name="sec.*"/>
+            </run>
+        </groups>
+        <!--<classes>
+            <class name="test.java.unit.ParametersTest"/>
+        </classes>-->
+        <packages>
+            <package name="test.java.unit"/>
+            <package name="test.java.unit.inheritance"/>
+        </packages>
+        <!--<method-selectors>
+            <method-selector>
+                <script language="beanshell"><![CDATA[
+         groups.containsKey("test1")
+       ]]></script>
+            </method-selector>
+        </method-selectors>-->
+
+    </test>
+</suite>
