@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Unit tests') {
             steps{
-                bat 'mvn clean -DsuiteXmlFile=unit-testng.xml test'
+                sh 'mvn clean -DsuiteXmlFile=unit-testng.xml test'
             }
         }
     }
