@@ -1,4 +1,4 @@
-package test.java.ui;
+package test.java.ui.basic;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
