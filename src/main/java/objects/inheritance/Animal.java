@@ -21,7 +21,7 @@ public abstract class Animal implements Comparable<Animal> {
     }
 
     public void sleep() {
-        System.out.println("Animal sleeps .....");
+        System.out.println("Animal sleeps .....    ");
     }
 
     public String getName() {
