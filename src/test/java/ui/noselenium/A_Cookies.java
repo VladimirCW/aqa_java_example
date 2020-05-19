@@ -1,11 +1,11 @@
-package test.java.ui.waits;
+package test.java.ui.noselenium;
 
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class C_Cookies {
+public class A_Cookies {
     public static void main(String[] args) throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
