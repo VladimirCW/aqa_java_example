@@ -1,5 +1,6 @@
 package test.java.ui.po.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,6 +67,46 @@ public class HomePage {
         search.sendKeys(searchStr);
         search.sendKeys(Keys.ENTER);
         wait.until(ExpectedConditions.urlContains("#search_text=" + searchStr.toLowerCase()));
+        return this;
+    }
+
+    public HomePage search2(String searchStr) {
+        String popupStrSelect = "[class='popup-css lang-switcher-popup sprite-side']";
+        By popup = By.cssSelector(popupStrSelect);
+        By popupClose = By.cssSelector(popupStrSelect + " [class='popup-close']");
+        By search = By.cssSelector("[name='search']");
+        this.searchStr = searchStr;
+        //By searchResultItem = By.xpath("//span[contains(text(), '" + searchStr + "')]");
+        WebElement searchEl = driver.findElement(search);
+        wait.until(ExpectedConditions.elementToBeClickable(searchEl));
+        if( driver.findElements(popup).size() > 0 ) {
+            driver.findElement(popupClose).click();
+        }
+        searchEl.clear();
+        searchEl.sendKeys(this.searchStr);
+        searchEl.sendKeys(Keys.ENTER);
+        By searchResultItem = By.xpath("//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') ,'" + searchStr.toLowerCase() + "')]");
+        if(!searchStr.toLowerCase().equals("iphone"))
+        {
+            wait.until(ExpectedConditions.not(
+                    ExpectedConditions
+                            .presenceOfAllElementsLocatedBy(By
+                                    .xpath("//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') ,'iphone')]")))
+            );
+           /* wait.until(new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver webDriver) {
+                    int amount = driver.findElements(By.xpath("//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') ,'iphone')]")).size();
+                    return amount == 0;
+                }
+            });*/
+        }
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.urlContains("text=" + searchStr.toLowerCase()),
+                ExpectedConditions.presenceOfElementLocated(searchResultItem)
+        ));
+        //wait.until(ExpectedConditions.urlContains("text=" + searchStr.toLowerCase()));
+        //wait.until(ExpectedConditions.presenceOfElementLocated(searchResultItem));
         return this;
     }
 
