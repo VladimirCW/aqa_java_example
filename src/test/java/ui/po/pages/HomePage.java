@@ -1,5 +1,7 @@
 package test.java.ui.po.pages;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,14 +14,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class HomePage {
+public class HomePage{
+    Logger logger = LogManager.getLogger(HomePage.class);
     private String searchStr;
     private final WebDriver driver;
     private final WebDriverWait wait;
     private final String closePopUpStr = "[class='popup-close']";
     private final String popupStr = "[class='popup-css lang-switcher-popup sprite-side']";
 
-    @FindBy(css = "[class='rz-header-search-input-text passive']")
+    //@FindBy(css = "[class='rz-header-search-input-text passive']")
+    @FindBy(css = "[name='search'], [name='text']")
     private WebElement search;
     @FindBy(css = "[data-rz-gtm-event='suggestedQuery']")
     private WebElement suggestion;
@@ -37,24 +41,29 @@ public class HomePage {
     @FindBy(how = How.CSS, using = popupStr + " " + closePopUpStr)
     //@CacheLookup
     private List<WebElement> closePopups;
+    @FindBy(css = "[href='https://rozetka.com.ua/contacts/']")
+    private WebElement contactBtn;
 
     public HomePage(WebDriver driver) {
+        logger.debug("Initializer new instance of Home page");
         this.driver = driver;
         wait = new WebDriverWait(driver, 20);
         PageFactory.initElements(driver, this);
     }
 
     public HomePage open() {
+        logger.info("Open page");
         driver.get("https://rozetka.com.ua/notebooks/c80004/");
         return this;
     }
 
     public HomePage open(String url) {
+        logger.info(String.format("Open '%s'", url));
         driver.get(url);
         return this;
     }
 
-    public HomePage search(String searchStr) {
+    public HomePage search2(String searchStr) {
         this.searchStr = searchStr;
         wait.until(ExpectedConditions.or(
                 ExpectedConditions.elementToBeClickable(search),
@@ -70,13 +79,13 @@ public class HomePage {
         return this;
     }
 
-    public HomePage search2(String searchStr) {
+    public HomePage search(String searchStr) {
+        logger.info(String.format("Search '%s'", searchStr));
         String popupStrSelect = "[class='popup-css lang-switcher-popup sprite-side']";
         By popup = By.cssSelector(popupStrSelect);
         By popupClose = By.cssSelector(popupStrSelect + " [class='popup-close']");
-        By search = By.cssSelector("[name='search']");
+        By search = By.cssSelector("[name='search'], [name='text']");
         this.searchStr = searchStr;
-        //By searchResultItem = By.xpath("//span[contains(text(), '" + searchStr + "')]");
         WebElement searchEl = driver.findElement(search);
         wait.until(ExpectedConditions.elementToBeClickable(searchEl));
         if( driver.findElements(popup).size() > 0 ) {
@@ -85,7 +94,7 @@ public class HomePage {
         searchEl.clear();
         searchEl.sendKeys(this.searchStr);
         searchEl.sendKeys(Keys.ENTER);
-        By searchResultItem = By.xpath("//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') ,'" + searchStr.toLowerCase() + "')]");
+        By searchResultItem = By.xpath("//a[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') ,'" + searchStr.toLowerCase() + "')]");
         if(!searchStr.toLowerCase().equals("iphone"))
         {
             wait.until(ExpectedConditions.not(
@@ -111,6 +120,7 @@ public class HomePage {
     }
 
     public HomePage clickSearch() {
+        logger.info("Click search");
         wait.until(ExpectedConditions.or(
                 ExpectedConditions.elementToBeClickable(search),
                 ExpectedConditions.visibilityOf(popUp)
@@ -126,15 +136,22 @@ public class HomePage {
     }
 
     public HomePage clickSuggestion() {
+        logger.info("Click suggestion");
         wait.until(ExpectedConditions.elementToBeClickable(suggestion));
         suggestion.click();
         //(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(iPhone));
         //(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(iPhone)).click();
         //WebElement el = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(iPhone));
         wait.until(ExpectedConditions.and(
-                ExpectedConditions.urlContains("#search_text=" + searchStr.toLowerCase()),
-                ExpectedConditions.elementToBeClickable(iPhone)
+                ExpectedConditions.urlContains("text=" + searchStr.toLowerCase())
         ));
+        return this;
+    }
+
+    public HomePage clickContacts() {
+        logger.info("Click contacts");
+        wait.until(ExpectedConditions.elementToBeClickable(contactBtn));
+        contactBtn.click();
         return this;
     }
 }
