@@ -53,6 +53,8 @@ public class HomePage{
 
     public HomePage open() {
         logger.info("Open page");
+        logger.error("Open page");
+        logger.warn("Open page");
         driver.get("https://rozetka.com.ua/notebooks/c80004/");
         return this;
     }

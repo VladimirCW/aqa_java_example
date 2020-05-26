@@ -28,6 +28,11 @@
         </resources>-->
         <!--<outputDirectory>test2</outputDirectory>-->
         <sourceDirectory>src</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/test/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

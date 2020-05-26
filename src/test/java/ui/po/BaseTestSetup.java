@@ -20,6 +20,9 @@ public class BaseTestSetup {
         //options.addArguments("--incognito");
         driver = new ChromeDriver(options);
         screenshot = new Screenshot(driver);
+        /*Cookie ckUa = new Cookie("slang", "ua", "/");
+        driver.get("https://rozetka.com.ua/ua/404.html");
+        driver.manage().addCookie(ckUa);*/
         //driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
     }
 

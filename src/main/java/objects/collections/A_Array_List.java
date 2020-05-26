@@ -33,5 +33,8 @@ public class A_Array_List {
         Integer[] arr = {45, 89, 78, 89};
         List<Integer> list5 = new ArrayList(Arrays.asList(arr));
         for (Integer el: list5) System.out.println(el);
+
+        int[] a = {3, 6, 78};
+        List<Integer> l = Arrays.asList(arr);
     }
 }
