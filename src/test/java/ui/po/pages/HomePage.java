@@ -11,6 +11,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import test.java.utils.PropertyLoader;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class HomePage{
         logger.info("Open page");
         logger.error("Open page");
         logger.warn("Open page");
-        driver.get("https://rozetka.com.ua/notebooks/c80004/");
+        driver.get(PropertyLoader.loadProperty("url"));
         return this;
     }
 

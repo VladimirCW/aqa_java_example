@@ -1,25 +1,47 @@
 package test.java.ui.po;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import test.java.ui.po.utils.Screenshot;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class BaseTestSetup {
     WebDriver driver;
-    Screenshot screenshot;
 
+    @Parameters({"browser"})
     @BeforeMethod
-    public void beforeMethod() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications"); //usefull
+    public void beforeMethod(@Optional("chrome") String browser, ITestContext testContext) {
+        //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+
         //options.addArguments("--incognito");
-        driver = new ChromeDriver(options);
-        screenshot = new Screenshot(driver);
+        //driver = new ChromeDriver(options);
+        try {
+            switch (browser) {
+                case "chrome":
+                    ChromeOptions optionsch = new ChromeOptions();
+                    optionsch.addArguments("--disable-notifications"); //usefull
+                    driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), optionsch);
+                    break;
+                case "firefox":
+                    FirefoxOptions optionsff = new FirefoxOptions();
+                    driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), optionsff);
+                    break;
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        testContext.setAttribute("driver", driver);
+
         /*Cookie ckUa = new Cookie("slang", "ua", "/");
         driver.get("https://rozetka.com.ua/ua/404.html");
         driver.manage().addCookie(ckUa);*/
@@ -28,7 +50,11 @@ public class BaseTestSetup {
 
     @AfterMethod
     public void afterMethod(ITestResult testResult) {
-        screenshot.makeScreenshot(testResult);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.quit();
     }
 }
