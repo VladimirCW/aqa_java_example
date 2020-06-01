@@ -13,7 +13,6 @@ public class A_Cookies {
         WebDriver driver = new ChromeDriver(options);
         Cookie ckEn = new Cookie("language", "en-US", "/");
         Cookie ckRu = new Cookie("language", "ru-RU", "/");
-        //driver.manage().getCookies().add(ckRu);
         driver.get("http://www.redlipstick.club/AAA");
         driver.manage().addCookie(ckRu);
         driver.get("http://www.redlipstick.club/");

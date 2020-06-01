@@ -24,7 +24,7 @@ public class TestA extends BaseTestSetup{
     @Test
     public void test1() {
         homePage.open()
-                .search("iPhone")
+                //.search("iPhone")
                 //.search("meizu")
                 //.search("xiaomi")
                 ///.clickSearch()

@@ -124,6 +124,12 @@
             <artifactId>ashot</artifactId>
             <version>1.5.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-commandline -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-commandline</artifactId>
+            <version>2.13.3</version>
+        </dependency>
 
     </dependencies>
 

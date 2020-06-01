@@ -30,6 +30,7 @@ public class BaseTestSetup {
                     ChromeOptions optionsch = new ChromeOptions();
                     optionsch.addArguments("--disable-notifications"); //usefull
                     driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), optionsch);
+                    driver.manage().window().maximize();
                     break;
                 case "firefox":
                     FirefoxOptions optionsff = new FirefoxOptions();
