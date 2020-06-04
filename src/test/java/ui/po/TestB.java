@@ -12,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 @TmsLink("TMS-111")
 @Epic("Search menu")
 @Feature("Search by one word")
-public class TestA extends BaseTestSetup{
+public class TestB extends BaseTestSetup{
     HomePage homePage;
     ContactPage contactPage;
     FaqPage faqPage;
@@ -46,11 +46,6 @@ public class TestA extends BaseTestSetup{
     }
 
     @Story("Shouldn't search by two words")
-    @Severity(SeverityLevel.BLOCKER)
-    @Description(value = "## topic \n" +
-            "Test-case: \n" +
-            "1. First \n" +
-            "2. Second")
     @Test
     public void test2() {
         homePage.open();
@@ -58,7 +53,6 @@ public class TestA extends BaseTestSetup{
     }
 
     @Story("Should show error message")
-    @Severity(SeverityLevel.MINOR)
     @Test
     public void test3() {
         homePage.open().clickContacts();

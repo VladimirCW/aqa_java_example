@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Ignored tests",
+    "matchedStatuses": ["skipped"]
+  },
+  {
+    "name": "Can't login",
+    "matchedStatuses": ["broken", "failed"],
+    "messageRegex": ".*Unable to locate element.*aaa.*"
+  },
+  {
+    "name": "Assertion error",
+    "matchedStatuses": ["broken", "failed"],
+    "messageRegex": ".*expected.*but found.*"
+  }
+]

@@ -6,3 +6,8 @@ gradle/
 *.exe
 logs/
 screenshots/
+allure-report/
+allure-results/*
+!allure-results/categories.json
+!allure-results/*.properties
+.allure/

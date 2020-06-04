@@ -1,5 +1,6 @@
 package test.java.ui.po.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -19,10 +20,16 @@ public class ContactPage {
         wait = new WebDriverWait(this.driver, 10);
     }
 
+    @Step("Click FaQ")
     public ContactPage clickFaq() {
         logger.info("Click FAQ");
         wait.until(ExpectedConditions.elementToBeClickable(qAndABn));
         driver.findElement(qAndABn).click();
+        return this;
+    }
+
+    @Step
+    public ContactPage sillyStep(){
         return this;
     }
 

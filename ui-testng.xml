@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="First_Suite">
+    <test name="First_test">
+        <classes>
+            <class name="test.java.ui.po.TestA">
+                <methods>
+                    <exclude name="test1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

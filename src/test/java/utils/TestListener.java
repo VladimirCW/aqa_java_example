@@ -1,7 +1,10 @@
 package test.java.utils;
 
+import io.qameta.allure.Attachment;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.*;
 
@@ -42,7 +45,7 @@ public class TestListener implements
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        new Screenshot((WebDriver) iTestResult.getTestContext().getAttribute("driver")).makeScreenshot(iTestResult);
+        //new Screenshot((WebDriver) iTestResult.getTestContext().getAttribute("driver")).makeScreenshot(iTestResult);
     }
 
     @Override
@@ -63,5 +66,11 @@ public class TestListener implements
     @Override
     public void onFinish(ITestContext iTestContext) {
         //System.out.println("ON FINISH");
+    }
+
+    @Attachment(value = "screenshot", type = "image/png")
+    private byte[] attachScreenshot(ITestResult iTestResult) {
+        WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
 }

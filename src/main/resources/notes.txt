@@ -3,3 +3,11 @@ mvn clean -Dtest=DPTest#test2 test
 mvn clean -Dtest=DPTest#test2+test1 test
 mvn clean -Dtest=DPTest#test* test
 https://bugs.chromium.org/p/chromedriver/issues/detail?id=3342
+
+# allure
+allure generate - сгенерировать из папки allure-results
+allure serve - собрать
+allure open - открыть
+allure serve target/allure-results/
+allure generate allure-results -c -o allure-report
+mvn allure:report

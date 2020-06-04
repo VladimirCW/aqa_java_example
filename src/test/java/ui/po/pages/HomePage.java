@@ -1,5 +1,6 @@
 package test.java.ui.po.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -48,10 +49,11 @@ public class HomePage{
     public HomePage(WebDriver driver) {
         logger.debug("Initializer new instance of Home page");
         this.driver = driver;
-        wait = new WebDriverWait(driver, 20);
+        wait = new WebDriverWait(driver, 10);
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Open home page")
     public HomePage open() {
         logger.info("Open page");
         logger.error("Open page");
@@ -60,6 +62,7 @@ public class HomePage{
         return this;
     }
 
+    @Step("Open home page with URL {url} ")
     public HomePage open(String url) {
         logger.info(String.format("Open '%s'", url));
         driver.get(url);
@@ -151,6 +154,7 @@ public class HomePage{
         return this;
     }
 
+    @Step("Click contacts")
     public HomePage clickContacts() {
         logger.info("Click contacts");
         wait.until(ExpectedConditions.elementToBeClickable(contactBtn));

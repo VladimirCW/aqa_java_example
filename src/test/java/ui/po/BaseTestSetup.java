@@ -1,5 +1,8 @@
 package test.java.ui.po;
 
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -51,11 +54,24 @@ public class BaseTestSetup {
 
     @AfterMethod
     public void afterMethod(ITestResult testResult) {
+        attachString();
+        attachScreenshot(testResult);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         driver.quit();
+    }
+
+    @Attachment
+    private String attachString() {
+        return "Helo, I am a string attachment";
+    }
+
+    @Attachment(value = "screenshot", type = "image/png")
+    private byte[] attachScreenshot(ITestResult iTestResult) {
+        WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
 }
