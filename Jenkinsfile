@@ -17,22 +17,22 @@ pipeline {
                 bat 'mvn clean -DsuiteXmlFile=ui-testng.xml test'
             }
         }
-        post{
-            always{
-                script {
-                    allure([
-                        includeProperties: false,
-                        jdk: '',
-                        properties: [],
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'allure-results']]
-                    ])
-                }
-            }
-        }
         stage('Deploy') {
             steps{
                 echo 'Deployed'
+            }
+        }
+    }
+    post{
+        always{
+            script {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-results']]
+                ])
             }
         }
     }
