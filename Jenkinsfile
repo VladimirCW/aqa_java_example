@@ -9,7 +9,17 @@ pipeline {
         }
         stage('Unit tests') {
             steps{
-                sh 'mvn clean -DsuiteXmlFile=unit-testng.xml test'
+                bat 'mvn clean -DsuiteXmlFile=unit-testng.xml test'
+            }
+        }
+        stage('UI tests') {
+            steps{
+                bat 'mvn clean -DsuiteXmlFile=ui-testng.xml test'
+            }
+        }
+        stage('Deploy') {
+            steps{
+                echo 'Deployed'
             }
         }
     }
