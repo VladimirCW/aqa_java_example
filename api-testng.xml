@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Tdoist_suite">
+    <test name="Projects_tests">
+        <classes>
+
+        </classes>
+    </test>
+</suite>
