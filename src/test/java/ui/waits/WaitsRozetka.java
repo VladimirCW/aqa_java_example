@@ -85,7 +85,14 @@ public class WaitsRozetka {
         }
         WebElement errorMsg = driver.findElement(errorMsgBy);
         //WebElement errorMsg = (new WebDriverWait(driver, 20)).until(ExpectedConditions.presenceOfElementLocated(errorMsgBy));
-        //wait.until(ExpectedConditions.textToBePresentInElementLocated(errorMsgBy, " Пользователь с логином "));
+        /*(new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
+            @NullableDecl
+            @Override
+            public Boolean apply(@NullableDecl WebDriver driver) {
+                return driver.findElement(errorMsgBy).getText().contains("Пользователь с логином");
+            }
+        });*/
+        //(new WebDriverWait(driver, 10)).until(d -> d.findElement(errorMsgBy).getText().contains("ddd"));
         String emailFromError = errorMsg.findElement(By.cssSelector("[class='auth-modal__form-email']")).getText();
         String actualResult = errorMsg.getText();
         String expectedResult = String.format("Пользователь с логином %s не зарегистрирован", email);
