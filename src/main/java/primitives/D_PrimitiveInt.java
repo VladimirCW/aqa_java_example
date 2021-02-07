@@ -12,5 +12,8 @@ public class D_PrimitiveInt {
         float d = 4.6f;
         double e = 45333333.78;
         System.out.println(e);
+        // numeric separators
+        int thousand = 1_000;
+        int billion = 1_000_000;
     }
 }
